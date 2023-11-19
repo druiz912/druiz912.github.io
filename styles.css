@@ -1,0 +1,34 @@
+/* Estilos generales para todas las imágenes */
+img {
+    max-width: 100%; /* Hace que las imágenes sean responsivas y no se desborden de sus contenedores */
+    border-radius: 10px; /* Añade bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil a las imágenes */
+    transition: transform 0.3s ease-in-out; /* Añade una transición suave al hacer hover sobre las imágenes */
+}
+
+/* Efecto de escala al hacer hover sobre las imágenes */
+img:hover {
+    transform: scale(1.2);
+}
+
+/* Estilos específicos para las imágenes dentro de la sección de actividades */
+#actividades img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 10px; /* Agrega un margen inferior para separar las imágenes del texto */
+}
+
+#actividades img:hover {
+    transform: scale(0.9);
+}
+
+iframe {
+    display: block; /* Hace que el iframe sea un bloque para ajustarse al ancho del contenedor */
+    margin: 0 auto; /* Centra el iframe horizontalmente */
+    border: 1px solid #ccc; /* Añade un borde para separar visualmente el iframe del contenido circundante */
+    border-radius: 10px; /* Añade bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil al iframe */
+}
