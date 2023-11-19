@@ -25,6 +25,19 @@ img:hover {
     transform: scale(0.9);
 }
 
+#quienes-somos img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 10px; /* Agrega un margen inferior para separar las imágenes del texto */
+}
+
+#quienes-somos img:hover {
+    transform: scale(0.7);
+}
+
 iframe {
     display: block; /* Hace que el iframe sea un bloque para ajustarse al ancho del contenedor */
     margin: 0 auto; /* Centra el iframe horizontalmente */
@@ -32,3 +45,29 @@ iframe {
     border-radius: 10px; /* Añade bordes redondeados */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil al iframe */
 }
+
+#game-container {
+    text-align: center;
+  }
+  
+  #animal-img {
+    max-width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    font-size: 16px;
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  #time-btn {
+    background-color: red;
+    color: white;
+  }
+  
+  #time-btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }

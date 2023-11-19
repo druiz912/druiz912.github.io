@@ -28,13 +28,13 @@
             <!-- Carousel II -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="./assets/image-1portada.jpg" alt="Imagen principal" class="img-fluid">
+                    <img src="./assets/nene-superman.jpg" alt="Imagen principal" class="img-fluid">
                 </div>
                 <div class="carousel-item">
                     <img src="./assets/imag2.jpg" alt="Imagen principal" class="img-fluid">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://faspasclm.files.wordpress.com/2022/03/02_post_opcion-01_agbell-con-faspas.jpg?w=768" alt="Imagen principal" class="img-fluid">
+                    <img src="./assets/portada3.jpg" alt="Imagen principal" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -46,6 +46,7 @@
             <div class="container">
                 <h2 class="mb-4">¿Quiénes Somos?</h2>
                 <p  class="lead"> Somos una asociación llamada ADPC, se encarga de ofrecer accesibilidad a las personas con discapacidad visual de Cádiz, sobre todo para que lleven su vida de la mejor manera posible, ofreciendo oportunidades y sonrisas</p>
+                <img src="./assets/foto corporativa.jpg" alt="Imagen principal" class="img-fluid">
                 <h3>Funcionalidades</h3>
                 <ul>
                     <li>Generar accesibilidad a las actividades de ocio y tiempo libre.</li>
@@ -73,22 +74,29 @@
                         <ul>
                             <li>
                                 Centro Histórico- Cádiz
+                                <img src="./assets/excursion-cadiz.jpg" alt="Imagen principal" class="img-fluid">
                             </li>
                             <li>
                                 Sendero Adaptado-Santa fe
+                                <img src="./assets/excursion2.jpg" alt="Imagen principal" class="img-fluid">
                             </li>
                             <li>
                                 Parque fluvial - Fuengirola
                             </li>
                         </ul>
-
-                        <img src="./assets/excursion-cadiz.jpg" alt="Imagen principal" class="img-fluid">
                     </li>
-                    <li>Encuentros:(Convivencia, Encuentros sociales, Encuentros con profesionales)
+                    <li>Encuentros: convivencia, encuentros sociales, encuentros con profesionales
+                        <img src="./assets/excursion1.jpg" alt="Imagen principal" class="img-fluid">
                     </li>
-                    <li>Encuentros:(Convivencia, Encuentros sociales, Encuentros con profesionales)
-                    </li>
-                    <li>Actividades socioculturales de ocio y tiempo libre:(“Campana de bolas”,“Adivina el audio animal” y “Rescata el secuestro”)
+                    <li>Actividades socioculturales de ocio y tiempo libre:“Campana de bolas”, “Adivina el audio animal” y “Rescata el secuestro”
+                        <img src="./assets/excursion1.jpg" alt="Imagen principal" class="img-fluid">
+                        <div id="game-container">
+                            <img id="animal-img" src="./assets/game-audio-animal.jpg" alt="¿Qué animal es?">
+                            <button id="start-btn" onclick="startGame()">Iniciar juego</button>
+                            <button id="audio-btn" onclick="playAudio()">Repetir audio</button>
+                            <button id="time-btn" onclick="checkAnswer()">Tiempo</button>
+                          </div>
+                          <audio id="animal-audio" src=""></audio>
                     </li>
                 </ol>
             </div>
@@ -108,6 +116,7 @@
  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
  <!-- Enlace al archivo JS de Bootstrap -->
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ <script src="script.js"></script>
 </body>
 
 </html>
