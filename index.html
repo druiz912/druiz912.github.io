@@ -36,6 +36,9 @@
                 <div class="carousel-item">
                     <img src="./assets/portada3.jpg" alt="Imagen principal" class="img-fluid">
                 </div>
+                <div class="carousel-item">
+                    <img src="./assets/team-hands.jpg" alt="Imagen principal" class="img-fluid">
+                </div>
             </div>
         </div>
     </header>
@@ -45,7 +48,7 @@
         <section id="quienes-somos" class="mb-4">
             <div class="container">
                 <h2 class="mb-4">¿Quiénes Somos?</h2>
-                <p  class="lead"> Somos una asociación llamada ADPC, se encarga de ofrecer accesibilidad a las personas con discapacidad visual de Cádiz, sobre todo para que lleven su vida de la mejor manera posible, ofreciendo oportunidades y sonrisas</p>
+                <p class="lead"> Somos una asociación llamada ADPC, se encarga de ofrecer accesibilidad a las personas con discapacidad visual de Cádiz, sobre todo para que lleven su vida de la mejor manera posible, ofreciendo oportunidades y sonrisas</p>
                 <img src="./assets/foto corporativa.jpg" alt="Imagen principal" class="img-fluid">
                 <h3>Funcionalidades</h3>
                 <ul>
@@ -56,13 +59,7 @@
                 <!-- Integración de la presentación de PowerPoint -->
                 <h3>Presentación en PowerPoint</h3>
                 <p>Te dejamos toda nuestra información como asocación en el siguiente PDF:</p>
-                <iframe
-                src="./assets/archivoPDF.pdf"
-                width="100%"
-                height="600px"
-                loading="lazy"
-                title="PDF-file"
-                ></iframe>
+                <iframe src="./assets/archivoPDF.pdf" width="100%" height="600px" loading="lazy" title="PDF-file"></iframe>
             </div>
         </section>
 
@@ -82,21 +79,40 @@
                             </li>
                             <li>
                                 Parque fluvial - Fuengirola
+                                <img src="./assets/parque-fuengirola.jpg" alt="Imagen principal" class="img-fluid">
                             </li>
                         </ul>
                     </li>
-                    <li>Encuentros: convivencia, encuentros sociales, encuentros con profesionales
-                        <img src="./assets/excursion1.jpg" alt="Imagen principal" class="img-fluid">
+                    <li>Encuentros:
+                        <ul>
+                            <li>Convivencias con todo tipo de personas
+                                <img src="./assets/team-hands.jpg" alt="Imagen principal" class="img-fluid">
+                            </li>
+                            <li>Encuentros sociales<img src="./assets/excursion1.jpg" alt="Imagen principal" class="img-fluid"></li>
+                            <li>Encuentros con profesionales</li>
+                        </ul>
                     </li>
-                    <li>Actividades socioculturales de ocio y tiempo libre:“Campana de bolas”, “Adivina el audio animal” y “Rescata el secuestro”
-                        <img src="./assets/excursion1.jpg" alt="Imagen principal" class="img-fluid">
-                        <div id="game-container">
-                            <img id="animal-img" src="./assets/game-audio-animal.jpg" alt="¿Qué animal es?">
-                            <button id="start-btn" onclick="startGame()">Iniciar juego</button>
-                            <button id="audio-btn" onclick="playAudio()">Repetir audio</button>
-                            <button id="time-btn" onclick="checkAnswer()">Tiempo</button>
-                          </div>
-                          <audio id="animal-audio" src=""></audio>
+                    <li>Actividades socioculturales de ocio y tiempo libre:
+                        <ul>
+                            <li>
+                                Campana de bolas
+                                <img src="./assets/nenes.jpg" alt="Imagen principal" class="img-fluid">
+                            </li>
+                            <li>
+                                Adivina el animal
+                                <div id="game-container">
+                                    <img id="animal-img" src="./assets/game-audio-animal.jpg" alt="¿Qué animal es?">
+                                    <button id="start-btn" onclick="startGame()">Iniciar juego</button>
+                                    <button id="audio-btn" style="display:none;" onclick="playAudio()">Repetir audio</button>
+                                    <button id="time-btn" style="display:none;" onclick="checkAnswer()">Tiempo</button>
+                                    <audio id="animal-audio"></audio>
+                            </li>
+                            <li>
+                                Rescata el secuestro
+                                <img src="./assets/rescata-secuestro.png" alt="Imagen principal" class="img-fluid">
+                            </li>
+                        </ul>
+
                     </li>
                 </ol>
             </div>
@@ -104,19 +120,17 @@
     </div>
     <footer class="bg-dark text-white text-center py-3">
         <div class="container">
-            <p>&copy; 2023 <strong>ASOCIACION ADPC</strong> 
+            <p>&copy; 2023 <strong>ASOCIACION ADPC</strong>
                 Todos los derechos reservados.</p>
             <p>Hecho con todo el amor y la ilusión hacia el progreso y la integración</p>
-              <!-- Animación del corazón -->
-
         </div>
     </footer>
 
- <!-- Enlace a la biblioteca jQuery (necesaria para Bootstrap) -->
- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
- <!-- Enlace al archivo JS de Bootstrap -->
- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
- <script src="script.js"></script>
+    <!-- Enlace a la biblioteca jQuery (necesaria para Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Enlace al archivo JS de Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>
