@@ -13,6 +13,7 @@ img:hover {
 
 /* Estilos específicos para las imágenes dentro de la sección de actividades */
 #actividades img {
+    display: flex;
     max-width: 100%;
     height: auto;
     border-radius: 10px;
