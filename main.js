@@ -20,12 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentAnimalIndex = 0;
   let timer;
 
-  // Agrega el evento de envío del formulario para prevenir la recarga de la página
-  document
-    .getElementById("game-container")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-    });
+
 
   function startGame() {
     if (!isGameStarted) {
