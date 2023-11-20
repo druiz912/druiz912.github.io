@@ -100,12 +100,13 @@
                             </li>
                             <li>
                                 Adivina el animal
-                                <div id="game-container">
+                                <form id="game-container">
                                     <img id="animal-img" src="./assets/portada-game-audio.jpg" alt="¿Qué animal es?">
-                                    <button id="start-btn" onclick="startGame()">Iniciar juego</button>
+                                    <button id="start-btn" onclick="startGame(event)">Iniciar juego</button>
                                     <button id="audio-btn" style="display:none;" onclick="playAudio()">Repetir audio</button>
                                     <button id="time-btn" style="display:none;" onclick="checkAnswer()">Tiempo</button>
                                     <audio id="animal-audio"></audio>
+                                </form>
                             </li>
                             <li>
                                 Rescata el secuestro
