@@ -24,6 +24,7 @@ function startGame() {
   if (!isGameStarted) {
     isGameStarted = true;
     currentAnimalIndex = getRandomIndex();
+    print("Se va a empezar x el numero: " + currentAnimalIndex.toString());
     startBtn.style.display = "none";
     timeBtn.style.display = "block";
     loadNextAnimal();
@@ -37,7 +38,7 @@ function getRandomIndex() {
   return Math.floor(Math.random() * audioFiles.length);
 }
 
-function loadNextAnimal(currentAnimalIndex) {
+function loadNextAnimal() {
   const audioElement = document.getElementById("animal-audio");
   const imgElement = document.getElementById("animal-img");
 
@@ -49,7 +50,7 @@ function loadNextAnimal(currentAnimalIndex) {
   audioBtn.style.display = "block";
   // habria que revisar esto pq no da tiempo a que se escuche o vea la imagen
   timer = setTimeout(() => {
-    checkAnswer(currentAnimalIndex);
+    checkAnswer();
   }, audioElement.duration * 10000); // Espera hasta que termine el audio
 }
 
@@ -59,22 +60,33 @@ function playAudio() {
   audioElement.play();
 }
 
-function checkAnswer(currentAnimalIndex) {
+function checkAnswer() {
   const audioElement = document.getElementById("animal-audio");
   const imgElement = document.getElementById("animal-img");
 
+  // Pausa el audio antes de cambiar la imagen
+  audioElement.pause();
+
   const audioFileName = audioFiles[currentAnimalIndex];
+  print("checkAnswer: audioFileName: " + audioFileName);
+  print("checkAnswer: audioElement: " + audioElement);
   const animalName = audioFileName.split(".")[0]; // Elimina la extensión del archivo
+  print("checkAnswer: animalName: " + animalName);
   const imagePath = `./assets/audios/${animalName}.png`; // Ruta de la imagen en la carpeta de animales
 
   imgElement.src = imagePath; // Cambia a la imagen correspondiente al animal
 
+  // Desactiva el botón durante la espera
+  audioBtn.disabled = true;
+
   // Reinicia el juego si hay más animales, de lo contrario, muestra un mensaje de fin de juego
   if (currentAnimalIndex < audioFiles.length - 1) {
-    let newIndex = currentAnimalIndex + 1; // Corregir esta línea
-    setTimeout(() => {
-      loadNextAnimal(newIndex);
-    }, 10000); // Espera 2 segundos antes de cargar el siguiente animal
+    currentAnimalIndex++; // Corregir esta línea
+    setTimeout(() =>
+    {
+      audioBtn.disabled = false;
+      loadNextAnimal();
+    }, 6000); // Espera 2 segundos antes de cargar el siguiente animal
   } else {
     alert("¡Juego terminado!");
     resetGame();
