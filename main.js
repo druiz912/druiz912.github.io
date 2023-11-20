@@ -13,6 +13,7 @@ const audioFiles = [
 ];
 
 const startBtn = document.getElementById("start-btn");
+const audioBtn = document.getElementById("audio-btn");
 const timeBtn = document.getElementById("time-btn");
 
 let isGameStarted = false;
@@ -25,7 +26,7 @@ function startGame() {
     currentAnimalIndex = getRandomIndex();
     startBtn.style.display = "none";
     timeBtn.style.display = "block";
-    loadNextAnimal(currentAnimalIndex);
+    loadNextAnimal();
   } else {
     clearTimeout(timer);
     checkAnswer();
@@ -45,9 +46,11 @@ function loadNextAnimal(currentAnimalIndex) {
   audioElement.src = `./assets/audios/${audioFileName}`; // Ruta completa del archivo de audio
   audioElement.load();
   audioElement.play();
+  audioBtn.style.display = "block";
+  // habria que revisar esto pq no da tiempo a que se escuche o vea la imagen
   timer = setTimeout(() => {
     checkAnswer(currentAnimalIndex);
-  }, audioElement.duration * 1000); // Espera hasta que termine el audio
+  }, audioElement.duration * 10000); // Espera hasta que termine el audio
 }
 
 function playAudio() {
@@ -62,7 +65,7 @@ function checkAnswer(currentAnimalIndex) {
 
   const audioFileName = audioFiles[currentAnimalIndex];
   const animalName = audioFileName.split(".")[0]; // Elimina la extensión del archivo
-  const imagePath = `./assets/animales/${animalName}.png`; // Ruta de la imagen en la carpeta de animales
+  const imagePath = `./assets/audios/${animalName}.png`; // Ruta de la imagen en la carpeta de animales
 
   imgElement.src = imagePath; // Cambia a la imagen correspondiente al animal
 
@@ -71,7 +74,7 @@ function checkAnswer(currentAnimalIndex) {
     let newIndex = currentAnimalIndex + 1; // Corregir esta línea
     setTimeout(() => {
       loadNextAnimal(newIndex);
-    }, 2000); // Espera 2 segundos antes de cargar el siguiente animal
+    }, 10000); // Espera 2 segundos antes de cargar el siguiente animal
   } else {
     alert("¡Juego terminado!");
     resetGame();
@@ -83,5 +86,5 @@ function resetGame() {
   currentAnimalIndex = 0;
   startBtn.style.display = "block";
   timeBtn.style.display = "none";
-  document.getElementById("animal-img").src = "./assets/game-audio-animal.jpg";
+  document.getElementById("animal-img").src = "./assets/portada-game-audio.jpg";
 }
