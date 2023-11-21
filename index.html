@@ -7,10 +7,7 @@
     <title>Asociacion ADPC</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Agrega la referencia a Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
 </head>
 
 <body>
@@ -56,10 +53,10 @@
                     <li>Fomentar autonomía e independencia.</li>
                     <li>Incluir socialmente al colectivo con discapacidad visual en espacios de ocio y tiempo libre.</li>
                 </ul>
-                <!-- Integración de la presentación de PowerPoint -->
-                <h3>Presentación en PowerPoint</h3>
+                <!-- Integración del PDF -->
+                <h3>Resumen en PDF de la asociación</h3>
                 <p>Te dejamos toda nuestra información como asocación en el siguiente PDF:</p>
-                <iframe src="./assets/powerpoint.pptx" width="100%" height="600px" loading="lazy" title="PPTX file"></iframe>
+                <iframe src="./assets/archivoPDF.pdf" width="100%" height="600px" loading="lazy" title="PPTX file"></iframe>
             </div>
         </section>
 
@@ -100,13 +97,13 @@
                             </li>
                             <li>
                                 Adivina el animal
-                                <form id="game-container">
+                                <div id="game-container">
                                     <img id="animal-img" src="./assets/portada-game-audio.jpg" alt="¿Qué animal es?">
-                                    <button id="start-btn" onclick="startGame()">Iniciar juego</button>
-                                    <button id="audio-btn" style="display:none;" onclick="playAudio()">Repetir audio</button>
-                                    <button id="time-btn" style="display:none;" onclick="checkAnswer()">Tiempo</button>
+                                    <button id="start-btn" onclick="startGame(event)">Iniciar juego</button>
+                                    <button id="audio-btn" style="display:none;" onclick="playAudio(event)">Repetir audio</button>
+                                    <button id="time-btn" style="display:none;" onclick="checkAnswer(event)">Tiempo</button>
                                     <audio id="animal-audio"></audio>
-                                </form>
+                                </div>
                             </li>
                             <li>
                                 Rescata el secuestro

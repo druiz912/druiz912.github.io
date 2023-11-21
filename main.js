@@ -1,99 +1,114 @@
 // Asegúrate de que el DOM está completamente cargado antes de ejecutar el script
-const audioFiles = [
-  "cabra.mp3",
-  "gallo.mp3",
-  "pajaro.mp3",
-  "vaca.mp3",
-  "rana.mp3",
-  "pato.mp3",
-  "perro.mp3",
-  "gato.mp3",
-  "cerdo.mp3",
-];
+document.addEventListener("DOMContentLoaded", function () {
+  const audioFiles = [
+    "cabra.mp3",
+    "gallo.mp3",
+    "pajaro.mp3",
+    "vaca.mp3",
+    "rana.mp3",
+    "pato.mp3",
+    "perro.mp3",
+    "gato.mp3",
+    "cerdo.mp3",
+  ];
 
-const startBtn = document.getElementById("start-btn");
-const audioBtn = document.getElementById("audio-btn");
-const timeBtn = document.getElementById("time-btn");
-
-let isGameStarted = false;
-let currentAnimalIndex = 0;
-let timer;
-
-function startGame() {
-  if (!isGameStarted) {
-    isGameStarted = true;
-    currentAnimalIndex = getRandomIndex();
-    print("Se va a empezar x el numero: " + currentAnimalIndex.toString());
-    startBtn.style.display = "none";
-    timeBtn.style.display = "block";
-    loadNextAnimal();
-  } else {
-    clearTimeout(timer);
-    checkAnswer();
-  }
-}
-
-function getRandomIndex() {
-  return Math.floor(Math.random() * audioFiles.length);
-}
-
-function loadNextAnimal() {
-  const audioElement = document.getElementById("animal-audio");
+  const startBtn = document.getElementById("start-btn");
+  const audioBtn = document.getElementById("audio-btn");
+  const timeBtn = document.getElementById("time-btn");
   const imgElement = document.getElementById("animal-img");
-
-  imgElement.src = "./assets/incognit.jpg"; // Cambia a la imagen de pregunta
-  const audioFileName = audioFiles[currentAnimalIndex];
-  audioElement.src = `./assets/audios/${audioFileName}`; // Ruta completa del archivo de audio
-  audioElement.load();
-  audioElement.play();
-  audioBtn.style.display = "block";
-  // habria que revisar esto pq no da tiempo a que se escuche o vea la imagen
-  timer = setTimeout(() => {
-    checkAnswer();
-  }, audioElement.duration * 10000); // Espera hasta que termine el audio
-}
-
-function playAudio() {
   const audioElement = document.getElementById("animal-audio");
-  audioElement.currentTime = 0;
-  audioElement.play();
-}
 
-function checkAnswer() {
-  const audioElement = document.getElementById("animal-audio");
-  const imgElement = document.getElementById("animal-img");
+  let isGameStarted = false;
+  let currentAnimalIndex = 0;
+  let timer;
+  const playedAnimalIndices = new Set();
 
-  // Pausa el audio antes de cambiar la imagen
-  audioElement.pause();
+  window.startGame = function (event) {
+    event.preventDefault();
 
-  const audioFileName = audioFiles[currentAnimalIndex];
-  print("checkAnswer: audioFileName: " + audioFileName);
-  print("checkAnswer: audioElement: " + audioElement);
-  const animalName = audioFileName.split(".")[0]; // Elimina la extensión del archivo
-  print("checkAnswer: animalName: " + animalName);
-  const imagePath = `./assets/audios/${animalName}.png`; // Ruta de la imagen en la carpeta de animales
+    if (!isGameStarted) {
+      isGameStarted = true;
+      currentAnimalIndex = getRandomIndex();
+      print("Se va a empezar por el número: " + currentAnimalIndex.toString());
+      startBtn.style.display = "none";
+      timeBtn.style.display = "block";
+      loadNextAnimal();
+    } else {
+      clearTimeout(timer);
+      checkAnswer(event);
+    }
+  };
 
-  imgElement.src = imagePath; // Cambia a la imagen correspondiente al animal
-
-  // Desactiva el botón durante la espera
-  audioBtn.disabled = true;
-
-  // Reinicia el juego si hay más animales, de lo contrario, muestra un mensaje de fin de juego
-  if (currentAnimalIndex < audioFiles.length - 1) {
-    currentAnimalIndex++; // Corregir esta línea
-    setTimeout(() => {
-      audioBtn.disabled = false;
-    }, 6000); // Espera 2 segundos antes de cargar el siguiente animal
-  } else {
-    alert("¡Juego terminado!");
-    resetGame();
+  function getRandomIndex() {
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * audioFiles.length);
+    } while (playedAnimalIndices.has(randomIndex));
+    playedAnimalIndices.add(randomIndex);
+    return randomIndex;
   }
-}
 
-function resetGame() {
-  isGameStarted = false;
-  currentAnimalIndex = 0;
-  startBtn.style.display = "block";
-  timeBtn.style.display = "none";
-  document.getElementById("animal-img").src = "./assets/portada-game-audio.jpg";
-}
+  function loadNextAnimal() {
+    imgElement.src = "./assets/incognit.jpg";
+    const audioFileName = audioFiles[currentAnimalIndex];
+    audioElement.src = `./assets/audios/${audioFileName}`;
+    audioElement.load();
+
+    audioElement.addEventListener(
+      "canplaythrough",
+      function onCanPlayThrough() {
+        audioElement.removeEventListener("canplaythrough", onCanPlayThrough);
+        audioElement.play();
+        audioBtn.style.display = "block";
+      }
+    );
+
+    // Cambiar la imagen cuando comienza la carga del audio
+    audioElement.addEventListener("loadstart", function onLoadStart() {
+      audioElement.removeEventListener("loadstart", onLoadStart);
+      imgElement.src = "./assets/incognit.jpg";
+    });
+  }
+
+  window.playAudio = function (event) {
+    event.preventDefault();
+    audioElement.currentTime = 0;
+    audioElement.play();
+  };
+
+  window.checkAnswer = function (event) {
+    event.preventDefault();
+    audioElement.pause();
+    const audioFileName = audioFiles[currentAnimalIndex];
+    const animalName = audioFileName.split(".")[0];
+    const imagePath = `./assets/audios/${animalName}.png`;
+
+    imgElement.src = imagePath;
+    audioBtn.disabled = true;
+
+    if (currentAnimalIndex < audioFiles.length - 1) {
+      currentAnimalIndex++;
+      setTimeout(() => {
+        audioBtn.disabled = false;
+        loadNextAnimal();
+      }, 2000);
+    } else {
+      alert("¡Juego terminado!");
+      resetGame();
+    }
+  };
+
+  function resetGame() {
+    playedAnimalIndices.clear();
+    isGameStarted = false;
+    currentAnimalIndex = 0;
+    startBtn.style.display = "block";
+    timeBtn.style.display = "none";
+    imgElement.src = "./assets/portada-game-audio.jpg";
+  }
+
+  // Asigna eventos a los botones
+  startBtn.addEventListener("click", startGame);
+  audioBtn.addEventListener("click", playAudio);
+  timeBtn.addEventListener("click", checkAnswer);
+});
