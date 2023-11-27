@@ -1,114 +1,130 @@
-// Asegúrate de que el DOM está completamente cargado antes de ejecutar el script
-document.addEventListener("DOMContentLoaded", function () {
-  const audioFiles = [
-    "cabra.mp3",
-    "gallo.mp3",
-    "pajaro.mp3",
-    "vaca.mp3",
-    "rana.mp3",
-    "pato.mp3",
-    "perro.mp3",
-    "gato.mp3",
-    "cerdo.mp3",
-  ];
+/**
+ * Metodo para modificar el estilo del elemento y mostrarlo
+ * @param {*} element
+ */
+function showElement(element) {
+  element.style.display = "block";
+}
 
-  const startBtn = document.getElementById("start-btn");
-  const audioBtn = document.getElementById("audio-btn");
-  const timeBtn = document.getElementById("time-btn");
-  const imgElement = document.getElementById("animal-img");
-  const audioElement = document.getElementById("animal-audio");
+/**
+ * Metodo para modificar el estilo del elemento y ocultarlo
+ * @param {*} element
+ */
+function hideElement(element) {
+  element.style.display = "none";
+}
 
-  let isGameStarted = false;
-  let currentAnimalIndex = 0;
-  let timer;
-  const playedAnimalIndices = new Set();
+const path = "./assets/audios/";
+const audioFiles = [
+  "cabra.mp3",
+  "gallo.mp3",
+  "pajaro.mp3",
+  "vaca.mp3",
+  "rana.mp3",
+  "pato.mp3",
+  "perro.mp3",
+  "gato.mp3",
+  "cerdo.mp3",
+];
 
-  window.startGame = function (event) {
-    event.preventDefault();
+const startBtn = document.getElementById("start-btn");
+const audioBtn = document.getElementById("audio-btn");
+const timeBtn = document.getElementById("time-btn");
+const imgElement = document.getElementById("animal-img");
+const respuestaImgElement = document.getElementById("respuesta-img");
 
-    if (!isGameStarted) {
-      isGameStarted = true;
-      currentAnimalIndex = getRandomIndex();
-      print("Se va a empezar por el número: " + currentAnimalIndex.toString());
-      startBtn.style.display = "none";
-      timeBtn.style.display = "block";
-      loadNextAnimal();
-    } else {
-      clearTimeout(timer);
-      checkAnswer(event);
-    }
-  };
+let audioElement;
+let currentAnimalIndex;
+let audioSource;
+let audioPaused = false;
+let listaSinDuplicados = new Set();
 
-  function getRandomIndex() {
-    let randomIndex;
-    do {
-      randomIndex = Math.floor(Math.random() * audioFiles.length);
-    } while (playedAnimalIndices.has(randomIndex));
-    playedAnimalIndices.add(randomIndex);
-    return randomIndex;
+/**
+ * Metodo para cambiar el texto del boton de audio, segun si es true o false la variable audioPased
+ */
+function toggleAudioButton() {
+  audioBtn.textContent = audioPaused ? "Parar Audio" : "Reanudar Audio";
+}
+
+document.getElementById("start-btn").addEventListener("click", function () {
+  hideElement(startBtn);
+  showElement(timeBtn);
+  hideElement(respuestaImgElement);
+
+  // Realiza
+  do {
+    // Obtén un número aleatorio para seleccionar un animal
+    currentAnimalIndex = Math.floor(Math.random() * audioFiles.length);
+  } while (listaSinDuplicados.has(currentAnimalIndex)); // Mientras en el set haya 'currentAnimalIndex'
+
+  listaSinDuplicados.add(currentAnimalIndex);
+  console.log("Lista de duplicados:", Array.from(listaSinDuplicados));
+
+  // Establece la fuente del audio
+  audioSource = path + audioFiles[currentAnimalIndex];
+  console.log("El audio a reproducir:", audioSource);
+  console.log("El numero[INDEX] generado es: ", currentAnimalIndex);
+
+  // Mostramos la imagen de incógnita
+  showElement(imgElement);
+
+  // Crea un nuevo elemento de audio y comienza la reproducción
+  audioElement = new Audio(audioSource);
+  audioElement.play();
+
+  // Mostrar imagen de ronda
+  imgElement.src = "./assets/incognit.jpg";
+
+  // Muestra el botón de "Tiempo"
+  showElement(timeBtn);
+  // Muestra el botón de "Audio"
+  showElement(audioBtn);
+
+  // Verifica si se han agotado todos los índices
+  if (listaSinDuplicados.size === audioFiles.length) {
+    alert("¡Has completado todos los índices!");
+    // Puedes realizar otras acciones aquí según tu necesidad
   }
+});
 
-  function loadNextAnimal() {
-    imgElement.src = "./assets/incognit.jpg";
-    const audioFileName = audioFiles[currentAnimalIndex];
-    audioElement.src = `./assets/audios/${audioFileName}`;
-    audioElement.load();
+document.getElementById("time-btn").addEventListener("click", function () {
+  // Detén la reproducción del audio
+  audioElement.pause();
 
-    audioElement.addEventListener(
-      "canplaythrough",
-      function onCanPlayThrough() {
-        audioElement.removeEventListener("canplaythrough", onCanPlayThrough);
-        audioElement.play();
-        audioBtn.style.display = "block";
-      }
-    );
+  // Ocultamos la imagen de incógnita
+  hideElement(imgElement);
 
-    // Cambiar la imagen cuando comienza la carga del audio
-    audioElement.addEventListener("loadstart", function onLoadStart() {
-      audioElement.removeEventListener("loadstart", onLoadStart);
-      imgElement.src = "./assets/incognit.jpg";
-    });
-  }
+  // Ponemos visible la imagen de respuesta
+  showElement(respuestaImgElement);
+  // Establece la imagen de respuesta
+  respuestaImgElement.src =
+    path + audioFiles[currentAnimalIndex].replace(".mp3", ".png");
+  console.log(respuestaImgElement.src);
+  // Oculta el botón de "Audio"
+  document.getElementById("audio-btn").style.display = "none";
+  // Oculta el botón de "Audio"
+  hideElement(audioBtn);
+  startBtn.textContent = "¡Otra vez!";
+  showElement(startBtn);
+  hideElement(timeBtn);
+});
 
-  window.playAudio = function (event) {
-    event.preventDefault();
-    audioElement.currentTime = 0;
-    audioElement.play();
-  };
-
-  window.checkAnswer = function (event) {
-    event.preventDefault();
+document.getElementById("audio-btn").addEventListener("click", function () {
+  // Cambiar el texto del botón y gestionar la pausa/reanudación
+  if (!audioPaused) {
+    // Cambia el texto del botón
+    audioBtn.textContent = "Reanudar Audio";
+    // Detén la reproducción del audio
     audioElement.pause();
-    const audioFileName = audioFiles[currentAnimalIndex];
-    const animalName = audioFileName.split(".")[0];
-    const imagePath = `./assets/audios/${animalName}.png`;
-
-    imgElement.src = imagePath;
-    audioBtn.disabled = true;
-
-    if (currentAnimalIndex < audioFiles.length - 1) {
-      currentAnimalIndex++;
-      setTimeout(() => {
-        audioBtn.disabled = false;
-        loadNextAnimal();
-      }, 2000);
-    } else {
-      alert("¡Juego terminado!");
-      resetGame();
-    }
-  };
-
-  function resetGame() {
-    playedAnimalIndices.clear();
-    isGameStarted = false;
-    currentAnimalIndex = 0;
-    startBtn.style.display = "block";
-    timeBtn.style.display = "none";
-    imgElement.src = "./assets/portada-game-audio.jpg";
+  } else {
+    // Cambia el texto del botón
+    audioBtn.textContent = "Parar Audio";
+    // Reanuda la reproducción del audio
+    audioElement.play();
   }
+  // Invierte el estado de pausa
+  audioPaused = !audioPaused;
 
-  // Asigna eventos a los botones
-  startBtn.addEventListener("click", startGame);
-  audioBtn.addEventListener("click", playAudio);
-  timeBtn.addEventListener("click", checkAnswer);
+  // Actualiza el texto del botón
+  toggleAudioButton();
 });
