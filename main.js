@@ -2,8 +2,8 @@
  * Metodo para modificar el estilo del elemento y mostrarlo
  * @param {*} element
  */
-function showElement(element) {
-  element.style.display = "block";
+function showElement(element, styleDisplay) {
+  element.style.display = styleDisplay;
 }
 
 /**
@@ -43,12 +43,12 @@ let listaSinDuplicados = new Set();
  * Metodo para cambiar el texto del boton de audio, segun si es true o false la variable audioPased
  */
 function toggleAudioButton() {
-  audioBtn.textContent = audioPaused ? "Parar Audio" : "Reanudar Audio";
+  audioBtn.textContent = audioPaused ? "Pausar audio" : "Reanudar audio";
 }
 
 document.getElementById("start-btn").addEventListener("click", function () {
   hideElement(startBtn);
-  showElement(timeBtn);
+  showElement(timeBtn, "block");
   hideElement(respuestaImgElement);
 
   // Realiza
@@ -66,7 +66,7 @@ document.getElementById("start-btn").addEventListener("click", function () {
   console.log("El numero[INDEX] generado es: ", currentAnimalIndex);
 
   // Mostramos la imagen de incógnita
-  showElement(imgElement);
+  showElement(imgElement, "block");
 
   // Crea un nuevo elemento de audio y comienza la reproducción
   audioElement = new Audio(audioSource);
@@ -76,13 +76,13 @@ document.getElementById("start-btn").addEventListener("click", function () {
   imgElement.src = "./assets/incognit.jpg";
 
   // Muestra el botón de "Tiempo"
-  showElement(timeBtn);
+  showElement(timeBtn, "block");
   // Muestra el botón de "Audio"
-  showElement(audioBtn);
+  showElement(audioBtn, "block");
 
   // Verifica si se han agotado todos los índices
   if (listaSinDuplicados.size === audioFiles.length) {
-    alert("¡Has completado todos los índices!");
+    alert("¡Has completado todos los audios!");
     // Puedes realizar otras acciones aquí según tu necesidad
   }
 });
@@ -95,7 +95,7 @@ document.getElementById("time-btn").addEventListener("click", function () {
   hideElement(imgElement);
 
   // Ponemos visible la imagen de respuesta
-  showElement(respuestaImgElement);
+  showElement(respuestaImgElement, "block");
   // Establece la imagen de respuesta
   respuestaImgElement.src =
     path + audioFiles[currentAnimalIndex].replace(".mp3", ".png");
@@ -105,7 +105,7 @@ document.getElementById("time-btn").addEventListener("click", function () {
   // Oculta el botón de "Audio"
   hideElement(audioBtn);
   startBtn.textContent = "¡Otra vez!";
-  showElement(startBtn);
+  showElement(startBtn, "block");
   hideElement(timeBtn);
 });
 
@@ -113,18 +113,17 @@ document.getElementById("audio-btn").addEventListener("click", function () {
   // Cambiar el texto del botón y gestionar la pausa/reanudación
   if (!audioPaused) {
     // Cambia el texto del botón
-    audioBtn.textContent = "Reanudar Audio";
+    // Actualiza el texto del botón
+    toggleAudioButton();
     // Detén la reproducción del audio
     audioElement.pause();
   } else {
     // Cambia el texto del botón
-    audioBtn.textContent = "Parar Audio";
+    // Actualiza el texto del botón
+    toggleAudioButton();
     // Reanuda la reproducción del audio
     audioElement.play();
   }
   // Invierte el estado de pausa
   audioPaused = !audioPaused;
-
-  // Actualiza el texto del botón
-  toggleAudioButton();
 });
