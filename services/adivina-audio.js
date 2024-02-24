@@ -53,9 +53,9 @@ function showElement(element, styleDisplay) {
   
     // Realiza
     do {
-      // Obtén un número aleatorio para seleccionar un animal
+      // Obtén un número aleatorio para seleccionar un audio
       currentIndexAudio = Math.floor(Math.random() * audioFiles.length);
-    } while (listaSinDuplicados.has(currentIndexAudio)); // Mientras en el set haya 'currentAnimalIndex'
+    } while (listaSinDuplicados.has(currentIndexAudio)); // Mientras en el set haya 'currentIndexAudio'
   
     listaSinDuplicados.add(currentIndexAudio);
     console.log("Lista de duplicados:", Array.from(listaSinDuplicados));
