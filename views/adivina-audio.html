@@ -1,0 +1,28 @@
+<!-- adivina-audio.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <section id="actividades" class="mb-4">
+        <div class="container">
+            <h2 class="mb-4">¡Adivina la canción!</h2>
+            <div id="game-container">
+                <img id="main-image-game" src="./assets/portada-game-audio.jpg" alt="¿Qué animal es?">
+                <img id="img-response" src="" alt="Respuesta" style="display:none;">
+                <div style="display: flex;">
+                    <button id="start-btn" style="display:block;">Iniciar juego</button>
+                    <button id="audio-btn" style="display:none;">Pausar</button>
+                    <button id="time-btn" style="display:none;">¡Tiempo!</button>
+                </div>
+                <audio id="animal-audio"></audio>
+            </div>
+        </div>
+    </section>
+    <script src="./services/adivina-audio.js"></script>
+</body>
+
+</html>
