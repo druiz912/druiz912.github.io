@@ -1,20 +1,6 @@
 /* Estilos específicos para el carrusel */
-#carouselExampleSlidesOnly .carousel-item img {
-  transition: transform 0.5s ease-in-out;
-  max-width: 80%;
-  image-rendering: optimizeQuality;
-}
 
-#carouselExampleSlidesOnly .carousel-item img:hover {
-  transform: scale(0.9);
-  border: 1px solid #000000;
-}
 
-.carousel-inner {
-  max-width: 100%;
-  max-height: 100%;
-  padding: 5%;
-}
 
 /* Estilos generales para todas las imágenes */
 img {
@@ -30,35 +16,6 @@ img {
   /* Borde gris de 1 píxel */
 }
 
-/* Estilos específicos para las imágenes dentro de la sección de actividades */
-#actividades img {
-  display: flex;
-  max-width: 50%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  margin-bottom: 10px;
-  /* Agrega un margen inferior para separar las imágenes del texto */
-}
-
-#actividades img:hover {
-  transform: scale(0.9);
-}
-
-#quienes-somos img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  margin-bottom: 10px;
-  /* Agrega un margen inferior para separar las imágenes del texto */
-}
-
-#quienes-somos img:hover {
-  transform: scale(0.7);
-}
 
 iframe {
   display: block;
@@ -77,11 +34,6 @@ iframe {
   text-align: center;
 }
 
-#animal-img {
-  max-width: 300px;
-  margin-bottom: 20px;
-}
-
 button {
   font-size: 16px;
   margin: 5px;
@@ -97,4 +49,38 @@ button {
 #time-btn:disabled {
   background-color: gray;
   cursor: not-allowed;
+}
+
+/* bingo-visual */
+#images {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto; /* Añade una barra de desplazamiento si las imágenes no caben en una sola fila */
+}
+
+#images img {
+  flex-shrink: 0; /* Evita que las imágenes se reduzcan de tamaño */
+  width: calc(94% / 4); /* Ajusta este valor según el número de imágenes que quieras mostrar por fila */
+  border: 1px solid #000;
+  margin: 10px;
+  box-sizing: border-box;
+  animation: fadeIn 1s ease-in-out 0s 1 normal forwards, fadeOut 1s ease-in-out 9s 1 normal forwards; /* Ajusta estos valores según la duración de la ronda */
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@media screen and (max-width: 600px) {
+  #images img {
+      width: 100%; /* Ajusta este valor según cómo quieras que se muestren las imágenes en pantallas pequeñas */
+  }
 }
