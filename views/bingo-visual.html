@@ -2,12 +2,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css">
+    <style>
+        #content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <h1>¡Bingo!</h1>
     <h3>Atentx a las cartas que van a aparecer en pantalla</h3>
-    <!-- Aquí va el contenido del juego de bingo-visual -->
-    <script src="./services/bingo-visual.js"></script>
+    <div id="content">
+        <div id="roundTimeDiv">
+            <label for="roundTime">Tiempo de la ronda (segundos):</label>
+            <input type="number" id="roundTime" min="1">
+        </div>
+        <div id="cardsNumberDiv">
+            <label for="cardsNumber">Número de cartas a desvelar:</label>
+            <input type="number" id="cardsNumber" min="1" max="4">
+        </div>
+        <div id="timer">Tiempo restante: <span id="timeLeft"></span></div>
+        <div id="rounds">Rondas restantes: <span id="roundsLeft"></span></div>
+        <button id="generateButton">Generar nuevas imágenes</button>
+    </div>
+    <div id="images"></div>
+    <script src="../services/bingo-visual.js"></script>
 </body>
 </html>
