@@ -14,17 +14,18 @@ function showElement(element, styleDisplay) {
     element.style.display = "none";
   }
   
-  const path = "./assets/audios/";
+  const path = "../assets/audios/";
   const audioFiles = [
-    "cabra.mp3",
-    "gallo.mp3",
-    "pajaro.mp3",
-    "vaca.mp3",
-    "rana.mp3",
-    "pato.mp3",
-    "perro.mp3",
-    "gato.mp3",
-    "cerdo.mp3",
+    "asieslavida.mp3",
+    "cruelsummer.mp3",
+    "HimnoAndalucia.mp3",
+    "Houdini.mp3",
+    "madridcity.mp3",
+    "miamor.mp3",
+    "noseve.mp3",
+    "vampire.mp3",
+    "vocation.mp3",
+    "yesand.mp3",
   ];
   
   const startBtn = document.getElementById("start-btn");
@@ -63,7 +64,6 @@ function showElement(element, styleDisplay) {
     // Establece la fuente del audio
     audioSource = path + audioFiles[currentIndexAudio];
     console.log("El audio a reproducir:", audioSource);
-    console.log("El numero[INDEX] generado es: ", currentIndexAudio);
   
     // Mostramos la imagen de incógnita
     showElement(imgElement, "block");
@@ -73,7 +73,7 @@ function showElement(element, styleDisplay) {
     audioElement.play();
   
     // Mostrar imagen de ronda
-    imgElement.src = "./assets/thinking.jpg";
+    imgElement.src = "../assets/thinking.jpg";
   
     // Muestra el botón de "Tiempo"
     showElement(timeBtn, "block");
@@ -97,8 +97,7 @@ function showElement(element, styleDisplay) {
     // Ponemos visible la imagen de respuesta
     showElement(respuestaImgElement, "block");
     // Establece la imagen de respuesta
-    respuestaImgElement.src =
-      path + audioFiles[currentIndexAudio].replace(".mp3", ".png");
+    respuestaImgElement.src = path + audioFiles[currentIndexAudio].replace(".mp3", ".jpg");
     console.log(respuestaImgElement.src);
     // Oculta el botón de "Audio"
     document.getElementById("audio-btn").style.display = "none";
