@@ -1,77 +1,75 @@
-// bingo-visual.js
-let usedCards = []; // Para almacenar las cartas ya usadas
-let timerId; // Para almacenar el ID del temporizador
-let roundCount = 0; // Para contar las rondas
-let totalRounds; // Para almacenar el número total de rondas
-let isPaused = false; // Para controlar si el juego está en pausa
+let usedCards = [];
+let timerId;
+let roundCount = 0;
+let totalRounds;
+let isPaused = false;
 
 let showContent;
 let stopTime;
 
 document.addEventListener("DOMContentLoaded", (event) => {
-
-  
   function hideContent() {
     document.getElementById("roundTimeDiv").style.display = "none";
     document.getElementById("cardsNumberDiv").style.display = "none";
     document.getElementById("input-container").style.display = "none";
   }
-  
+
   function updateRoundsLeft() {
-    document.getElementById("roundsLeft").textContent = totalRounds - roundCount;
+    document.getElementById("roundsLeft").textContent =
+      totalRounds - roundCount;
   }
-  
-  showContent = function() {
+
+  showContent = function () {
     document.getElementById("content").style.display = "ruby-text";
     document.getElementById("images").style.display = "flex";
-    document.getElementById("generateButton").style.display = "none"; // Ocultar el botón "Generar nuevas imágenes"
-  }
-  
-  stopTime = function() {
-    isPaused = true; // Pausar el juego
-    clearInterval(timerId); // Detiene el temporizador
-    document.getElementById("generateButton").textContent = "Reanudar ronda"; // Cambiar el texto del botón
-  }
-  
+    document.getElementById("generateButton").style.display = "none";
+  };
+
+  stopTime = function () {
+    isPaused = true;
+    clearInterval(timerId);
+    document.getElementById("generateButton").textContent = "Reanudar ronda";
+  };
+
   function restartGame() {
-    isPaused = false; // Reanudar el juego
-    usedCards = []; // Reiniciar las cartas usadas
-    roundCount = 0; // Reiniciar el contador de rondas
-    document.getElementById("images").innerHTML = ""; // Limpiar las imágenes
+    isPaused = false;
+    usedCards = [];
+    roundCount = 0;
+    document.getElementById("images").innerHTML = "";
     generateImages();
     showContent();
   }
-  
+
   function generateImages() {
     if (!isPaused) {
       const imagesDiv = document.getElementById("images");
-      imagesDiv.innerHTML = ""; // Limpiar las imágenes anteriores
-  
+      imagesDiv.innerHTML = "";
+
       const roundTime = document.getElementById("roundTime").value;
       const cardsNumber = document.getElementById("cardsNumber").value;
-  
-      totalRounds = Math.ceil(63 / cardsNumber); // Calcular el número total de rondas
+
+      totalRounds = Math.ceil(63 / cardsNumber);
       updateRoundsLeft();
-  
+
       hideContent();
-  
+
       for (let i = 0; i < cardsNumber; i++) {
         let randomNumber;
         do {
-          randomNumber = Math.floor(Math.random() * 63) + 1; // Generar un número aleatorio entre 1 y 63
+          randomNumber = Math.floor(Math.random() * 63) + 1;
         } while (usedCards.includes(randomNumber));
         usedCards.push(randomNumber);
-  
+
         const img = document.createElement("img");
-        img.src = `../assets/bingo-visual/card-${randomNumber}.png`; // Asumiendo que las imágenes son .png
+        img.src = `druiz912.github.io/assets/bingo-visual/card-${randomNumber}.PNG`;
         imagesDiv.appendChild(img);
       }
-  
+
       startTimer(roundTime);
       clearImagesAfterTime(roundTime, imagesDiv);
     }
   }
-  
+
   function startTimer(roundTime) {
     let timeLeft = roundTime;
     document.getElementById("timeLeft").textContent = timeLeft;
@@ -83,7 +81,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
     }, 1000);
   }
-  
+
   function clearImagesAfterTime(roundTime, imagesDiv) {
     setTimeout(() => {
       imagesDiv.innerHTML = "";

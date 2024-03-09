@@ -14,7 +14,7 @@ function showElement(element, styleDisplay) {
     element.style.display = "none";
   }
   
-  const path = "../assets/audios/";
+  const path = "druiz912.github.io/assets/audios/";
   const audioFiles = [
     "asieslavida.mp3",
     "cruelsummer.mp3",
