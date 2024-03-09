@@ -5,32 +5,48 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../styles/styles.css">
     <style>
-        /* Estilos para el contenedor de entrada de datos */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            background-color: #f2f2f2;
+            /* color de fondo pastel */
+        }
         #input-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-bottom: 2rem;
+            width: 33%;
             padding: 1rem;
             border: 1px solid #ccc;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
             background-color: #f2f2f2;
             /* color de fondo pastel */
         }
+        #input-container div {
+            margin-bottom: 1rem; /* Agrega un margen en la parte inferior de cada div */
+        }
+        #input-container label {
+            display: block; /* Hace que los labels ocupen toda la línea */
+            margin-bottom: 0.5rem; /* Agrega un margen en la parte inferior de cada label */
+        }
 
-        /* Estilos para los elementos de entrada */
+
         #input-container input {
             margin: 0.5rem 0;
             padding: 0.5rem;
+            width: 100%; /* Hace que los inputs ocupen toda la línea */
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        /* Estilos para el contenedor de generación de cartas */
+
         #content,
         #images {
             display: none;
-            /* Ocultar inicialmente */
             padding: 1rem;
             border: 1px solid #ccc;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -45,14 +61,14 @@
             align-items: center;
             overflow-x: auto;
             flex-shrink: 0;
-            /* Evita que las imágenes se reduzcan de tamaño */
+           
             width: calc(94% / 4);
-            /* Ajusta este valor según el número de imágenes que quieras mostrar por fila */
+ 
             border: 1px solid #000;
             margin: 10px;
             box-sizing: border-box;
             animation: fadeIn 1s ease-in-out 0s 1 normal forwards, fadeOut 1s ease-in-out 9s 1 normal forwards;
-            /* Ajusta estos valores según la duración de la ronda */
+
         }
 
         @keyframes fadeIn {
