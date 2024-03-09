@@ -1,21 +1,95 @@
 <!-- bingo-visual.html -->
 <!DOCTYPE html>
 <html>
+
 <head>
     <link rel="stylesheet" type="text/css" href="../styles/styles.css">
     <style>
-        #content {
+        /* Estilos para el contenedor de entrada de datos */
+        #input-container {
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f2f2f2;
+            /* color de fondo pastel */
+        }
+
+        /* Estilos para los elementos de entrada */
+        #input-container input {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Estilos para el contenedor de generación de cartas */
+        #content,
+        #images {
+            display: none;
+            /* Ocultar inicialmente */
+            padding: 1rem;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f2f2f2;
+            /* color de fondo pastel */
+        }
+
+        #images img {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            overflow-x: auto;
+            flex-shrink: 0;
+            /* Evita que las imágenes se reduzcan de tamaño */
+            width: calc(94% / 4);
+            /* Ajusta este valor según el número de imágenes que quieras mostrar por fila */
+            border: 1px solid #000;
+            margin: 10px;
+            box-sizing: border-box;
+            animation: fadeIn 1s ease-in-out 0s 1 normal forwards, fadeOut 1s ease-in-out 9s 1 normal forwards;
+            /* Ajusta estos valores según la duración de la ronda */
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            #images img {
+                width: 100%;
+                /* Ajusta este valor según cómo quieras que se muestren las imágenes en pantallas pequeñas */
+            }
         }
     </style>
 </head>
+
 <body>
     <h1>¡Bingo!</h1>
     <h3>Atentx a las cartas que van a aparecer en pantalla</h3>
-    <div id="content">
+
+    <!-- Contenedor de entrada de datos -->
+    <div id="input-container">
         <div id="roundTimeDiv">
             <label for="roundTime">Tiempo de la ronda (segundos):</label>
             <input type="number" id="roundTime" min="1">
@@ -24,11 +98,17 @@
             <label for="cardsNumber">Número de cartas a desvelar:</label>
             <input type="number" id="cardsNumber" min="1" max="4">
         </div>
-        <div id="timer">Tiempo restante: <span id="timeLeft"></span></div>
-        <div id="rounds">Rondas restantes: <span id="roundsLeft"></span></div>
-        <button id="generateButton">Generar nuevas imágenes</button>
+        <button id="generateButton" onclick="showContent()">Generar nuevas imágenes</button>
     </div>
+
+    <div id="content">
+        <div id="timer">Tiempo restante: <span id="timeLeft"></span></div>
+        <button id="stopTimeButton" onclick="stopTime()">Parar tiempo</button> <!-- Nuevo botón -->
+        <div id="rounds">Rondas restantes: <span id="roundsLeft"></span></div>
+    </div>
+
     <div id="images"></div>
     <script src="../services/bingo-visual.js"></script>
 </body>
+
 </html>
