@@ -26,9 +26,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
   };
 
   stopTime = function () {
-    isPaused = true;
-    clearInterval(timerId);
-    document.getElementById("generateButton").textContent = "Reanudar ronda";
+    if (!isPaused) {
+      isPaused = true;
+      remainingTime = document.getElementById("timeLeft").textContent; // Guardar el tiempo restante
+      currentRound = roundCount; // Guardar la ronda actual
+      clearInterval(timerId);
+      document.getElementById("generateButton").textContent = "Reanudar ronda";
+      console.log(
+        "Juego pausado. Tiempo restante: " +
+          remainingTime +
+          ", Ronda actual: " +
+          currentRound
+      );
+    } else {
+      isPaused = false;
+      roundCount = currentRound; // Restaurar la ronda actual
+      startTimer(remainingTime); // Restaurar el tiempo restante
+      document.getElementById("generateButton").textContent = "Parar tiempo";
+      console.log(
+        "Juego reanudado. Tiempo restante: " +
+          remainingTime +
+          ", Ronda actual: " +
+          currentRound
+      );
+    }
   };
 
   function restartGame() {
@@ -61,7 +82,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         usedCards.push(randomNumber);
 
         const img = document.createElement("img");
-        img.src = `druiz912.github.io/assets/bingo-visual/card-${randomNumber}.PNG`;
+        img.src = `/assets/bingo-visual/card-${randomNumber}.PNG`;
         imagesDiv.appendChild(img);
       }
 
