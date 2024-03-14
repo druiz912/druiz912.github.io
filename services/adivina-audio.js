@@ -18,7 +18,7 @@ const path = "../assets/audios/";
 const audioFiles = [
   "asieslavida.mp3",
   "cruelsummer.mp3",
-  "Houdini.mp3",
+  "houdini.mp3",
   "madridcity.mp3",
   "miamor.mp3",
   "noseve.mp3",
