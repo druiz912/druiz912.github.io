@@ -50,7 +50,6 @@ document.getElementById("start-btn").addEventListener("click", function () {
   hideElement(startBtn);
   showElement(timeBtn, "block");
   hideElement(respuestaImgElement);
-
   // Realiza
   do {
     // Obtén un número aleatorio para seleccionar un audio
@@ -59,21 +58,23 @@ document.getElementById("start-btn").addEventListener("click", function () {
 
   listaSinDuplicados.add(currentIndexAudio);
   console.log("Lista de duplicados:", Array.from(listaSinDuplicados));
-
   audioSource = path + audioFiles[currentIndexAudio];
   console.log("El audio a reproducir:", audioSource);
-
   showElement(imgElement, "block");
 
   audioElement = new Audio(audioSource);
+  audioElement.addEventListener("loadedmetadata", function() {
+    audioElement.currentTime = Math.random() * audioElement.duration;
+  
+    let minutes = Math.floor(audioElement.currentTime / 60);
+    let seconds = Math.floor(audioElement.currentTime % 60);
+
+    console.log(`El tiempo de inicio de la canción es: ${minutes} minutos y ${seconds} segundos.`);
+  });
   audioElement.play();
-
   imgElement.src = '../assets/thinking.jpg';
-
   showElement(timeBtn, "block");
-
   showElement(audioBtn, "block");
-
   if (listaSinDuplicados.size === audioFiles.length) {
     alert("¡Has completado todos los audios!");
   }
@@ -96,13 +97,10 @@ document.getElementById("time-btn").addEventListener("click", function () {
 document.getElementById("audio-btn").addEventListener("click", function () {
   if (!audioPaused) {
     toggleAudioButton();
-
     audioElement.pause();
   } else {
     toggleAudioButton();
-
     audioElement.play();
   }
-
   audioPaused = !audioPaused;
 });
